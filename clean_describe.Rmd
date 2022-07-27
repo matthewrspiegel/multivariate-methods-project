@@ -1,0 +1,31 @@
+---
+title: "Clean and Summarize"
+author: "Matt Spiegel"
+date: "2022-07-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(arsenal)
+```
+
+
+```{r}
+alz_data <- readxl::read_xlsx("Alz_mortality_data_complete.xlsx")
+alz_data <- alz_data |> 
+  janitor::clean_names() |> 
+  separate(county, c("county", "state"), sep = ", ") |> 
+  filter(state %in% c("AL", "FL", "LA", "MS", "GA"))
+```
+
+
+
+## Data Summary
+```{r}
+alz_data |> 
+  tableby(state ~ ., data = _) |> 
+  summary()
+```
+

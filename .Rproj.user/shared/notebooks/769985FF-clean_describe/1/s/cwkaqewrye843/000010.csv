@@ -1,0 +1,6 @@
+"0","alz_data |> 
+  tableby(state ~ ., data = _) |> 
+  summary()
+"
+"1","
+"
